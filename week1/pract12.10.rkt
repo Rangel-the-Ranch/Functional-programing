@@ -1,0 +1,44 @@
+A(define (fib n)
+  (cond ((= n 0) 0)
+        ((= n 1) 1)
+        (else (+ (fib(- n 1)) (fib(- n 2))))))
+
+(define (sum-interval a b)
+  (define (loop i res)
+    (if (> i b) res
+        (loop (+ i 1) (+ res i))))
+  (loop a 0))
+
+(define (count-digits n)
+  (if (< n 10) 1
+      (+ 1 (count-digits(quotient n 10)))))
+
+(define (reverse-int n)
+  (define (loop n res)
+    (if (= n 0) res
+        (loop (quotient n 10)
+              (+ (* res 10) (remainder n 10)))))
+   (loop n 0))
+
+(define (divisors-sum n)
+  (define (loop i res)
+    (cond ((> i n) res)
+          ((zero? (remainder n i))
+           (loop (+ i 1) (+ res i)))
+          (else (loop (+ i 1) res))))
+ (loop 1 0))
+
+(define (prime n)
+  (= (divisors-sum n) (+ n 1)))
+
+    
+
+         
+         
+
+
+
+
+    
+    
+        
