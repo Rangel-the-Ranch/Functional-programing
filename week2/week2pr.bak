@@ -27,4 +27,3 @@
  (cond [(= u 0) (abs v)]
  [(= v 0) (abs u)]
  [else (pos-gcd (abs u) (abs v))]))
-
