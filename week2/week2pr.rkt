@@ -60,6 +60,17 @@
   (helper 0 n))
 
 ;(reverse-number 1234)
+
+(define (return-palindrobe n)
+  (define (helper res k)
+    (if (<= k 0)
+        res
+        (helper (+ (* res 10) (remainder k 10)) (quotient k 10))))
+  (helper 0 n))
+
+;(return-palindrobe 1234)
+    
+
 ;####################################################################  
 
 (define (isPalindrobe? n)
