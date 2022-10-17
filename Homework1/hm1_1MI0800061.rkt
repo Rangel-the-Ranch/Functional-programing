@@ -13,8 +13,7 @@
 ;Функция която намира броя на k-специалните числа в затворения интервал [a, b]
 (define (count-specials k a b)
   
-  ;Помощна Функция която проверява дали едно число е k-специално
-  (define (is-k-special? n k)
+    (define (is-k-special? n k)
     (if (and (= 0 (remainder n k)) (= 0 (remainder (sum-of-digits n) k)))
         #t
         #f))
@@ -36,6 +35,18 @@
  
         
 ;##################### ЗАДАЧА 2 ###########################################
+
+(define (size-of-number n)
+  (define (helper a count)
+    (if (= 0 a)
+      count
+      (helper (quotient a 10) (+ count 1))))
+  (helper n 0))
+
+;(define (left-rotate n keep)
+  
+  
+  
     
     
         
