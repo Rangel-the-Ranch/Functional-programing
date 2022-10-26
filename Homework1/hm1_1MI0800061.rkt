@@ -43,10 +43,43 @@
       (helper (quotient a 10) (+ count 1))))
   (helper n 0))
 
-;(define (left-rotate n keep)
+(define (pow x n)
+  (define (helper result steps)
+    (if (> steps n)
+        result
+        (helper (* result x) (+ steps 1))))
+  (helper 1 0))
+
+
+
+(define (left-rotate n keep)
+  (define (kept-numbers)
+    (quotient (* n (pow 10 keep)) (pow 10 (size-of-number n))))
+  (define (remaining-numbers removeDigits)
+     (quotient (remainder (* n (pow 10 removeDigits)) (pow 10 (size-of-number n))) (pow 10  keep)))
+  (define (get-first-number num)
+    (quotient (* num 10) (pow 10 (- (size-of-number num) 1))))
+
+  ( +  ( + (* (remaining-numbers (+ keep 1)) 1) (get-first-number (remaining-numbers keep))) (* (kept-numbers) (pow 10 ( -(size-of-number n) ( + keep 1)))))
+ )
+
+(left-rotate 12345 1)
   
-  
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
     
         
