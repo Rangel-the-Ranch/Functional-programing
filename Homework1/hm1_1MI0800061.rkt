@@ -2,7 +2,7 @@
 
 ;##################### ЗАДАЧА 1 ###########################################
 
-;Помощна Функция която събира цифрите на естествено число
+;Функция която събира цифрите на естествено число
 (define (sum-of-digits n)
   (define (helper curr sum)
   (if (< curr 10)
@@ -17,21 +17,15 @@
     (if (and (= 0 (remainder n k)) (= 0 (remainder (sum-of-digits n) k)))
         #t
         #f))
-  
-  (define (helper x count)
-    (if (> x b)
-        count
-        (if (is-k-special? x k)
-            (helper (+ x 1) (+ count 1))
-            (helper (+ x 1) count))))
 
-  
-  (helper a 0))
+  (cond [(> a b) 0]
+        [(is-k-special? a k) (+(count-specials k (+ a 1) b) 1)]
+        [else (count-specials k (+ a 1) b)]))
 
-;(count-specials 3 3 9) 
-;(count-specials 5 10 100)
-;(count-specials 8 100 200)
-;(count-specials 15 1000 2000) 
+;(count-specials 3 3 9) ;3
+;(count-specials 5 10 100);2
+;(count-specials 8 100 200);1
+;(count-specials 15 1000 2000);15 
  
         
 ;##################### ЗАДАЧА 2 ###########################################
@@ -76,13 +70,13 @@
   
    (helper 0 n 0))
 
-;(max-rot 56789) ➝ 68957
-;(max-rot 12490) ➝ 29140
-;(max-rot 38458215) ➝ 85821534
-;(max-rot 195881031) ➝ 988103115
-;(max-rot 896219342) ➝ 962193428
-;(max-rot 69418307) ➝ 94183076
-;(max-rot 257117280) ➝ 571172802
+;(max-rot 56789) ; 68957
+;(max-rot 12490) ; 29140
+;(max-rot 38458215) ; 85821534
+;(max-rot 195881031) ; 988103115
+;(max-rot 896219342) ; 962193428
+;(max-rot 69418307) ; 94183076
+;(max-rot 257117280) ; 571172802
 
 
 
