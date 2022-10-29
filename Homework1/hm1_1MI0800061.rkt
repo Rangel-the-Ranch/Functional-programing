@@ -45,29 +45,37 @@
 
 (define (pow x n)
   (define (helper result steps)
-    (if (> steps n)
+    (if (>= steps n)
         result
         (helper (* result x) (+ steps 1))))
   (helper 1 0))
 
 
+(define (max-rot n)
+  ;Дефинираме константа, предотвартява извикването на (size-of-number n) няколко пъти
+  (define size-of-N (size-of-number n))
+  ;Функция която завърта наляво число с "keep" на брой цифри непроменени от ляво 
+  (define (left-rotate n keep)
+    ;Помощна функция връщаща непроменение цифри
+    (define (kept-digits)
+      (quotient (* n (pow 10 keep)) (pow 10 size-of-N)))
+    ;помощна функция връщаща цифрата завъртяна към последна позиция на новото N
+    (define (moving-back-digit)
+      (remainder  (quotient (* n 10) (pow 10 (- size-of-N keep) )) 10))
+    ;Помощна функция връщаща цифрите които се изместват с една позция на ляво
+    (define (moving-foward-digits)
+      (remainder n (pow 10 ( - (- size-of-N keep) 1))))
+    ( + (* (kept-digits) (pow 10 (- size-of-N keep))) (* (moving-foward-digits) 10) (moving-back-digit)))
 
-(define (left-rotate n keep)
-  (define (kept-numbers)
-    (quotient (* n (pow 10 keep)) (pow 10 (size-of-number n))))
-  (define (remaining-numbers removeDigits)
-     (quotient (remainder (* n (pow 10 removeDigits)) (pow 10 (size-of-number n))) (pow 10  keep)))
-  (define (get-first-number num)
-    (quotient (* num 10) (pow 10 (- (size-of-number num) 1))))
-
-  ( +  ( + (* (remaining-numbers (+ keep 1)) 1) (get-first-number (remaining-numbers keep))) (* (kept-numbers) (pow 10 ( -(size-of-number n) ( + keep 1)))))
- )
-
-(left-rotate 12345 1)
+  ;helper - прави последователни завъртания на ляво и запазва най-голямото по изискване на задачата
+  (define (helper biggest current count)
+    (cond [(> count size-of-N) biggest]
+          [(> current biggest) (helper current (left-rotate current (+ 0 count)) (+ 1 count))]
+          [(<= current biggest)(helper biggest (left-rotate current (+ 0 count))(+ 1 count))]))
   
+   (helper 0 n 0))
 
-
-
+;(max-rot 195881031)
 
 
 
