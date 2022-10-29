@@ -13,7 +13,7 @@
 ;Функция която намира броя на k-специалните числа в затворения интервал [a, b]
 (define (count-specials k a b)
   
-    (define (is-k-special? n k)
+    (define (is-k-special? n k);Проверява дали число е k-специално
     (if (and (= 0 (remainder n k)) (= 0 (remainder (sum-of-digits n) k)))
         #t
         #f))
@@ -26,7 +26,7 @@
             (helper (+ x 1) count))))
 
   
-  (helper a 0));рекурсивно???????????????????, коментари
+  (helper a 0))
 
 ;(count-specials 3 3 9) 
 ;(count-specials 5 10 100)
@@ -76,8 +76,13 @@
   
    (helper 0 n 0))
 
-;(max-rot 195881031)
-
+;(max-rot 56789) ➝ 68957
+;(max-rot 12490) ➝ 29140
+;(max-rot 38458215) ➝ 85821534
+;(max-rot 195881031) ➝ 988103115
+;(max-rot 896219342) ➝ 962193428
+;(max-rot 69418307) ➝ 94183076
+;(max-rot 257117280) ➝ 571172802
 
 
 
