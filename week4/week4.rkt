@@ -27,6 +27,66 @@
 
 
 
-(substr? 123 888123888)
+;(substr? 123 888123888)
 
+(define (my-identity x) x);
+;(my-identity 10)
+
+(define (my-compose f g)
+  (λ(x) (f (g x))))
+
+;((my-compose (λ (x) (* x 2)) (λ (x) (+ x 5))) 7)
+;((my-compose (λ(x) (+ x 1)) (λ(x) (* x 3))) 7)
+
+(define (my-negate p?)
+  (λ(x) (not (p? x))))
+
+;((my-negate (λ(x) (odd? x))) 14)
+
+;;;;;;;;;;;;
+(define (my-curry f x)
+  (λ (y z) (f x y z)))
+
+(define (difference F a b)
+  ( - (F a) (F b)))
+
+(define (mul3 n)
+  (* n 3))
+  
+;(difference  (λ(x) (* x 3)) 10 5)
+;(difference (λ (x) (* x 2)) 5 2)
+
+(define (f x) (* 2 x))
+;(f 10)
+;(define f-2 (λ(x) (* 2 x)))
+;(f-2 10)
+
+(define (derive f eps)
+  (λ(x) ( / ( - (f (+ x eps))(f x)) eps)))
+
+
+(define (h x) (* 2 x x))
+
+;((derive h 1e-4) 1)
+;((derive f 1e-4) 1)
+
+(define (derive-n f n eps)
+  (if (= n 0)
+      f
+      (derive (derive-n f (- n 1) eps) eps)))
+
+;((derive-n h 0 1e-3) 5)
+
+(define (make-pair a b)
+  (λ (x) (if x a b)))
+
+(define (one p)
+  (p #t))
+
+(define (two p)
+  (p #f))
+
+(define p1 (make-pair 1 2))
+(one p1)
+(two p1)
     
