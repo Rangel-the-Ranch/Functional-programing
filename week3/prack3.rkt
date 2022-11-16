@@ -25,12 +25,12 @@
 (define (pow x n)
   
   (define (helper result steps)
-    (if (> steps n)
+    (if (= steps n)
         result
         (helper (* result x) (+ steps 1))))
   (helper 1 0))
 
-;(pow 2 7)
+;(pow 2 10)
 
 (define (count-occuurences d n)
   (define (helper remaining count)
@@ -82,8 +82,17 @@
         (helper (+ counter 1) ( + result (pow x counter )))))
   (helper 0 0))
 
-(calc-sum 2 8)
-                     
+;(calc-sum 2 8)
+
+(define (calc-sum2 x n)
+  (define (helper sum count previous)
+    (define next (* previous x))
+    (if (= count n)
+        sum
+        (helper (+ sum next)  (+ count 1) next)))
+  (helper 0 0 1))
+
+;(calc-sum 2 9)
 ;Ctrl + \  -> λλλλ
 
 
