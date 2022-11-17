@@ -26,7 +26,10 @@
       xs
       (cons (first xs) (flatten xs))))
 
+
+
 ;(fllaten '(1 2 3 (4 5 () ( 6 7 8) 5 ( 7))))
+;(append '(1 2 3 (4 5 () ( 6 7 8) 5 ( 7))))
 ;(flatten 7)
 
 (define (deep-delete xs)
@@ -35,6 +38,6 @@
           [ (< (first restXS) level) (helper (+ 1 level) (rest(restXS))) ]
           [else (cond (first restXS) (helper (+ 1 level) (rest(restXS)) ))]))
   (helper 0 xs))
-(deep-delete '(1 2 3 (0 0 () ( 6 7 8) 5 ( 7))))
+;(deep-delete '(1 2 3 (0 0 () ( 6 7 8) 5 ( 7))))
 
           
