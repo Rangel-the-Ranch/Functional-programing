@@ -85,7 +85,31 @@
 
 ;((kth-max-min '(1 2 3 4 -5 6 7 -2 -1 0)) 2)
 
+(define (dig-pow n p)
+  (define (converter n)
+    (define (helper rem)
+      (cond [(< rem 10) (cons rem '())]
+            [else (cons (remainder rem 10) (helper (quotient rem 10)))]))
+    (reverse (helper n)))
+  
+  (define (sumator xs p)
+    (define (helper remXS sum count)
+      (cond [(equal? remXS null) sum]
+          [else (helper (cdr remXS) (+ sum (expt (car remXS) count)) (+ count 1))]))
+    (helper xs 0 p))
+  
+  (define convertedLS (converter n))
+  (define result (sumator convertedLS p))
+  (if (= 0 (remainder result n))
+      (quotient result n)
+      -1))
 
+
+
+;(dig-pow 89 1)
+;(dig-pow 92 1)
+;(dig-pow 695 2)
+;(dig-pow 46288 3)
 
 
 
