@@ -3,10 +3,15 @@
 ;(string? 'abw)
 
 ;(cdr (cadr '((a (b)) ((c (d)) e))))
+;(cdr '((a (b)) ((c (d)) e)))
 ;(cons '(a b) (list 'c '((d) e)))
+;'( (a b) c ((d)e))
 ;(append '(a (b c)) (caddr '((a b) c ((d) e))))
+;'(a (b c) (d) e)
 ;(append '(a '(b c)))
-;(list '(a b) 'b (list '(c d)))
+;(list '(a b) (list '(c d)))
+;'( (a b) (c d))
+;(list 'a  '(b c)) 
 
 
 (define (atom? a)
@@ -58,10 +63,22 @@
 (define y 10)
 (define z 10)
 
-( (λ(x y z) (+ x y z)) (+ x y) (* y 0) (- z 3)) 
+;( (λ(x y z) (+ x y z)) (+ x y) (* y 0) (- z 3)) 
 
 
+(define (where list-elements list-predicates)
+  (define (check x lps)
+    (cond [(empty? lps) #t]
+          [(not ((car lps) x)) #f]
+          [else (check x (cdr lps))]))
+  (cond [(empty? list-elements) '()]
+        [(check (car list-elements) list-predicates) (cons (car list-elements)
+                                                           (where (cdr list-elements) list-predicates))]
+        [else (where (cdr list-elements) list-predicates)]))
 
+
+;(where '(3 4 5 6 7 8 9 10) (list even? (lambda (x) (> x 5))))
+;(where '(3 4 5 7) (list even? (lambda (x) (> x 5))))
 
 
 
