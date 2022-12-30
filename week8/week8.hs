@@ -6,7 +6,7 @@ main = do
     --print (f1 10 a)
     --print (myMin 5 8)
     --print (isInside 7 6 10)
-    --print (myFunc 3 4)
+    print (myFunc 3 4)
 
 a :: Int
 a = 12
