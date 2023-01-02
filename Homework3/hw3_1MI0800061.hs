@@ -4,19 +4,43 @@ import Data.Char
 
 main :: IO()
 main = do
-    --print (generate [10, 15, 25] [1, 5, 20, 30])
-    inputFile <- readFile "input.txt"
-    print (countUniques inputFile)
+    print (generateAllPairs [10, 15, 25] [1, 5, 20, 30])
+    --print ((generate [1,2] [5,10]))
+
+    --inputFile <- readFile "input.txt"
+    --print (countUniques inputFile) 
 
 
+generateAllPairsByNum :: Int -> [Int] ->[[Int]]
+generateAllPairsByNum _ [] = []
+generateAllPairsByNum n (b:bs) 
+    = if(n < b)
+        then (n : [b]) : (generateAllPairsByNum n bs)
+        else (generateAllPairsByNum n bs)
+
+generateAllPairs :: [Int] -> [Int] ->[[[Int]]]
+generateAllPairs [] _ = []
+generateAllPairs _ [] = []
+generateAllPairs (a:as) bs = (generateAllPairsByNum a bs) : (generateAllPairs as bs)
+
+
+
+helper :: [[[Int]]] ->  [Int] -> [[Int]] -> [[Int]]
+helper [] _ res = res
+helper (x:xs) curr res =
+    if( (curr == []) || (head x) > (last curr))
+        then (helper xs  (curr ++ x) (res ++ [curr] ) )
+        else (helper xs  curr res)
+
+ 
 generate ::[Int] -> [Int] ->[[Int]]
-generate as bs = [[1]]
-
+generate [] _ = []
+generate _ [] = []
+generate as bs = (helper (generateAllPairs as bs) [-10] [] )
 
 
 
 ------------------------------------------------------------------------------------------------------------
--- 2 ,4 ,3 ,7
 
 getLinesOfFile :: String -> Int
 getLinesOfFile str 
